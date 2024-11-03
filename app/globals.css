@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 240 10% 3.9%; /* #0a0a0b */
+    --foreground: 0 0% 98%; /* #fafafa */
+    --card: 240 10% 3.9%; /* #0a0a0b */
+    --card-foreground: 0 0% 98%; /* #fafafa */
+    --popover: 240 10% 3.9%; /* #0a0a0b */
+    --popover-foreground: 0 0% 98%; /* #fafafa */
+    --primary: 220 100% 50%; /* #0066ff */
+    --primary-foreground: 0 0% 98%; /* #fafafa */
+    --secondary: 160 100% 50%; /* #00ff80 */
+    --secondary-foreground: 240 5.9% 10%; /* #191919 */
+    --muted: 240 3.7% 15.9%; /* #262626 */
+    --muted-foreground: 240 5% 64.9%; /* #a3a3a3 */
+    --accent: 300 100% 50%; /* #ff00ff */
+    --accent-foreground: 0 0% 98%; /* #fafafa */
+    --destructive: 0 100% 50%; /* #ff0000 */
+    --destructive-foreground: 0 0% 98%; /* #fafafa */
+    --border: 240 3.7% 15.9%; /* #262626 */
+    --input: 240 3.7% 15.9%; /* #262626 */
+    --ring: 220 100% 50%; /* #0066ff */
+    --chart-1: 220 100% 50%; /* #0066ff */
+    --chart-2: 160 100% 50%; /* #00ff80 */
+    --chart-3: 300 100% 50%; /* #ff00ff */
+    --chart-4: 60 100% 50%; /* #ffff00 */
+    --chart-5: 0 100% 50%; /* #ff0000 */
+    --radius: 0.5rem;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-orbitron;
+  }
+
+  button,
+  p,
+  a,
+  div,
+  li {
+    @apply font-roboto;
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply h-full bg-background text-foreground font-roboto;
+  }
+}
