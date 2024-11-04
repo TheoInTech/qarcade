@@ -1,5 +1,6 @@
 import "@/app/globals.css";
 import { Navbar } from "@/components/ui/navbar";
+import { WalletProvider } from "@/providers/wallet.provider";
 import type { Metadata } from "next";
 import { Orbitron, Roboto } from "next/font/google";
 
@@ -30,8 +31,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${roboto.variable} ${orbitron.variable} antialiased`}>
-        <Navbar className="top-2" />
-        {children}
+        <WalletProvider>
+          <Navbar className="fixed top-2" />
+
+          {children}
+        </WalletProvider>
       </body>
     </html>
   );

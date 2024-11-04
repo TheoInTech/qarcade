@@ -7,6 +7,7 @@ import {
   ProductItem,
 } from "@/components/ui/navbar-menu";
 import { cn } from "@/lib/utils";
+import { ConnectButton } from "arweave-wallet-kit";
 import { useState } from "react";
 
 export const Navbar = ({ className }: { className?: string }) => {
@@ -14,11 +15,14 @@ export const Navbar = ({ className }: { className?: string }) => {
   return (
     <div
       className={cn(
-        "fixed top-10 inset-x-0 max-w-2xl mx-auto z-50 bg-black",
+        "fixed top-10 inset-x-0 max-w-3xl mx-auto z-50 bg-black",
         className
       )}
     >
       <Menu setActive={setActive}>
+        <HoveredLink href="/">
+          <span className="font-orbitron font-bold">qARCade</span>
+        </HoveredLink>
         <MenuItem setActive={setActive} active={active} item="🎮 Play now!">
           <div className="  text-sm grid grid-cols-2 gap-10 p-4">
             <ProductItem
@@ -42,6 +46,7 @@ export const Navbar = ({ className }: { className?: string }) => {
           </div>
         </MenuItem>
         <HoveredLink href="/build">🛠️ Build a Game</HoveredLink>
+        <ConnectButton className="fixed top-2 right-2" />
       </Menu>
     </div>
   );
