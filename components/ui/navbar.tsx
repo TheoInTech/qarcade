@@ -15,7 +15,7 @@ export const Navbar = ({ className }: { className?: string }) => {
   return (
     <div
       className={cn(
-        "fixed top-10 inset-x-0 max-w-3xl mx-auto z-50 bg-black",
+        "fixed top-10 inset-x-0 max-w-3xl mx-auto z-50 ",
         className
       )}
     >
@@ -28,25 +28,25 @@ export const Navbar = ({ className }: { className?: string }) => {
             <ProductItem
               title="Collectible Clash"
               href="/collectible-clash"
-              src="https://assets.aceternity.com/demos/algochurn.webp"
+              src=""
               description="Enter community raffles and expand your collection of atomic assets!"
             />
             <ProductItem
               title="Fortune Loop"
               href="/fortune-loop"
-              src="https://assets.aceternity.com/demos/tailwindmasterkit.webp"
+              src=""
               description="Test your fortune at the daily lottery and get a chance to win a share of the community pot!"
             />
             <ProductItem
               title="Quantum Flip"
               href="/quantum-flip"
-              src="https://assets.aceternity.com/demos/Screenshot+2024-02-21+at+11.51.31%E2%80%AFPM.png"
+              src=""
               description="Flip the quantum coin and see if you can double your credits!"
             />
           </div>
         </MenuItem>
         <HoveredLink href="/build">🛠️ Build a Game</HoveredLink>
-        <ConnectButton className="fixed top-2 right-2" />
+        <ConnectButton accent="#1A1A1A00" className="fixed top-2 right-2 " />
       </Menu>
     </div>
   );

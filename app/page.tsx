@@ -9,7 +9,7 @@ export default function Home() {
           rangeY={800}
           particleCount={500}
           baseHue={180}
-          className="flex items-center flex-col justify-center px-2 md:px-10  py-4 w-full h-full gap-8"
+          className="flex text-white items-center flex-col justify-center px-2 md:px-10  py-4 w-full h-full gap-8"
         >
           <h1 className="text-8xl font-bold font-orbitron">qARCade</h1>
           <h2 className="text-xl font-roboto">

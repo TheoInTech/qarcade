@@ -30,30 +30,6 @@
     --chart-5: 0 100% 50%; /* #ff0000 */
     --radius: 0.5rem;
   }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-orbitron;
-  }
-
-  button,
-  p,
-  a,
-  div,
-  li {
-    @apply font-roboto;
-  }
-
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply h-full bg-background text-foreground font-roboto;
-  }
 }
 
 @layer utilities {
@@ -70,4 +46,28 @@
   .no-visible-scrollbar::-webkit-scrollbar {
     display: none;
   }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-orbitron;
+}
+
+button,
+p,
+a,
+div,
+li {
+  @apply font-roboto;
+}
+
+* {
+  @apply border-border;
+}
+body {
+  @apply h-full bg-background text-foreground font-roboto;
 }

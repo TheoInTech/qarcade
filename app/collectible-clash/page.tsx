@@ -1,4 +1,4 @@
-import { FilterTabs } from "@collectible-clash/(components)";
+import { FilterTabs } from "@/collectible-clash/(components)";
 
 const CollectibleClashPage = () => {
   return (
