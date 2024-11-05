@@ -1,5 +1,6 @@
 "use client";
 
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AppInfo, PermissionType } from "arconnect";
 import { ArweaveWalletKit } from "arweave-wallet-kit";
 import { ReactNode } from "react";
@@ -21,20 +22,30 @@ interface IWalletProvider {
 }
 
 export const WalletProvider = ({ children }: IWalletProvider) => {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 1000 * 60 * 60, // 1hr
+      },
+    },
+  });
+
   return (
-    <ArweaveWalletKit
-      config={{
-        ensurePermissions: true,
-        permissions: WALLET_PERMISSIONS,
-        appInfo: APP_INFO,
-      }}
-      theme={{
-        displayTheme: "dark",
-        radius: "minimal",
-        titleHighlight: { r: 0, g: 0, b: 0 },
-      }}
-    >
-      {children}
-    </ArweaveWalletKit>
+    <QueryClientProvider client={queryClient}>
+      <ArweaveWalletKit
+        config={{
+          ensurePermissions: true,
+          permissions: WALLET_PERMISSIONS,
+          appInfo: APP_INFO,
+        }}
+        theme={{
+          displayTheme: "dark",
+          radius: "minimal",
+          titleHighlight: { r: 0, g: 0, b: 0 },
+        }}
+      >
+        {children}
+      </ArweaveWalletKit>
+    </QueryClientProvider>
   );
 };

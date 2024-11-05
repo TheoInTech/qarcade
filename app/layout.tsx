@@ -33,7 +33,6 @@ export default function RootLayout({
       <body className={`${roboto.variable} ${orbitron.variable} antialiased`}>
         <WalletProvider>
           <Navbar className="fixed top-2" />
-
           {children}
         </WalletProvider>
       </body>

@@ -84,3 +84,9 @@ export type OrderbookEntryType = {
 };
 
 export type AssetSortType = "high-to-low" | "low-to-high" | "recently-listed";
+
+export interface GenericResponse<T = undefined> {
+  success: boolean;
+  message: string;
+  data: T;
+}

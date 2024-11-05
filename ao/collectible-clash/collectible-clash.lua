@@ -5,11 +5,26 @@ BazarProfileRegistry = "SNy4m-DrqxWl01YqGM4sxI8qCni-58re8uuJLvZPypY"
 -- Supported Collections for Clash
 DumdumsCollection = "JAHF1fo4MECRZZFKGcT0B6XM94Lqe-3FtB4Ht_kTEK0"
 
+-- States
+AssetList = AssetList or {}
+
+--[[
+    LIST RAFFLE
+]]
+
+--[[
+    JOIN RAFFLE
+]]
+
+--[[
+    CREATE RAFFLE
+]]
+
 Handlers.add(
     "Get-Atomic-Assets-By-Owner",
     { Action = "Get-Atomic-Assets-By-Owner" },
     function(msg)
-        local owner = msg.Data.Address
+        local owner = msg.From
 
         ao.send({
             Target = BazarProfileRegistry,
@@ -53,17 +68,25 @@ Handlers.add(
             for _, asset in ipairs(fetchedProfile.Assets) do
                 table.insert(mappedAssets, asset.Id)
             end
-            print('Sending assets to: ' .. owner)
-            ao.send({
-                Target = owner,
-                Data = json.encode(mappedAssets)
-            })
+            AssetList[owner] = mappedAssets
         else
             print('Sending no profile found to: ' .. owner)
-            ao.send({
-                Target = owner,
-                Data = 'No profile found'
-            })
+        end
+    end
+)
+
+Handlers.add(
+    "Dryrun-Fetch-Assets",
+    { Action = "Dryrun-Fetch-Assets" },
+    function(msg)
+        print(msg.Tags.Address)
+        local fetchedAssets = json.encode(AssetList[msg.Tags.Address])
+
+        if fetchedAssets then
+            print('fetchedAssets: ' .. fetchedAssets)
+            Handlers.utils.reply(fetchedAssets)(msg)
+        else
+            print('No assets found')
         end
     end
 )
