@@ -1,6 +1,9 @@
 local json = require("json")
 
 BazarProfileRegistry = "SNy4m-DrqxWl01YqGM4sxI8qCni-58re8uuJLvZPypY"
+QARCadeCollectibleClashEscrow = "lVpkXuszv7n6fdam30wBnKkNEowdUn8nVqdnjrfXA80"
+
+-- For testing, use this asset: "WtZ7fCA2kgvwdjbKdthB1uXD1hNPNtv7CaAVn4XWJbk"
 
 -- Supported Collections for Clash
 DumdumsCollection = "JAHF1fo4MECRZZFKGcT0B6XM94Lqe-3FtB4Ht_kTEK0"
@@ -8,9 +11,25 @@ DumdumsCollection = "JAHF1fo4MECRZZFKGcT0B6XM94Lqe-3FtB4Ht_kTEK0"
 -- States
 AssetList = AssetList or {}
 
+-- TODO: Put this in a SQLite database
+-- { AssetId = { Owner = "", Name = "" } }
+Raffles = Raffles or {} 
+
+-- TODO: Put this in a SQLite database
+-- { RaffleId = { Address = "", Tickets = 0 } } for now
+Participants = Participants or {}
+
 --[[
-    LIST RAFFLE
+    LIST ALL RAFFLES
 ]]
+
+Handlers.add(
+    "List-Raffles",
+    { Action = "List-Raffles" },
+    function (msg)
+        msg.reply(json.encode(Raffles))
+    end
+)
 
 --[[
     JOIN RAFFLE
@@ -88,5 +107,60 @@ Handlers.add(
         else
             print('No assets found')
         end
+    end
+)
+
+Handlers.add(
+    "Create-Raffle",
+    { Action = "Create-Raffle" },
+    function (msg)
+        local raffleData = json.decode(msg.Data) -- Asset, Tickets, Price, EndDate
+        print("Creating raffle for: " .. msg.From)
+        
+        -- Validate required fields
+        if not raffleData.Asset or not raffleData.Tickets or not raffleData.Price or not raffleData.EndDate then
+            Handlers.utils.reply('Missing required fields')(msg)
+            return
+        end
+
+        -- Validate asset ownership
+        local userAssets = AssetList[msg.From]
+        if not userAssets or not table.contains(userAssets, raffleData.Asset) then
+            Handlers.utils.reply('You do not own this asset')(msg)
+            return
+        end
+
+        -- Validate numeric fields
+        local tickets = tonumber(raffleData.Tickets)
+        if not tickets or tickets <= 0 or tickets ~= math.floor(tickets) then
+            Handlers.utils.reply('Invalid ticket count. Must be a positive integer')(msg)
+            return
+        end
+
+        local price = tonumber(raffleData.Price) 
+        if not price or price <= 0 then
+            Handlers.utils.reply('Invalid price. Must be a positive number')(msg)
+            return
+        end
+
+        -- Validate end date is in the future
+        local endDate = tonumber(raffleData.EndDate)
+        if not endDate or endDate <= os.time() then
+            Handlers.utils.reply('End date must be in the future')(msg)
+            return
+        end
+
+        local createdRaffle = {
+            Tickets = tickets,
+            Price = price,
+            EndDate = endDate,
+            Creator = msg.From,
+            CreatedAt = os.time(),
+            TicketsSold = 0,
+            Participants = {}
+        }
+        Raffles[asset] = createdRaffle
+        
+        Handlers.utils.reply('Raffle created successfully. Raffle ID: ' .. raffleData.Asset)(msg)
     end
 )

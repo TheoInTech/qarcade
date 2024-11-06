@@ -61,7 +61,7 @@ export const JoinRaffleModal = ({ children, asset }: IJoinRaffleModal) => {
         <ModalContent>
           {asset ? (
             <div className="grid grid-cols-12 gap-4">
-              <div className="relative col-span-4 flex justify-center items-center">
+              <div className="relative col-span-6 flex justify-center items-center">
                 <Image
                   src={asset.src}
                   alt={asset.name}
@@ -70,7 +70,7 @@ export const JoinRaffleModal = ({ children, asset }: IJoinRaffleModal) => {
                   className="rounded-lg h-[400px] w-full object-cover"
                 />
               </div>
-              <div className="col-span-8 flex flex-col gap-4">
+              <div className="col-span-6 flex flex-col gap-4 p-2">
                 <h2 className="text-4xl font-bold">{asset.name}</h2>
                 <div className="flex gap-4">
                   <p>Collection: {asset.collection}</p>|
@@ -85,7 +85,7 @@ export const JoinRaffleModal = ({ children, asset }: IJoinRaffleModal) => {
                     Tickets: {asset.ticketsRemaining}/{asset.ticketsOverall}
                   </AssetPill>
                   <AssetPill className="bg-accent/50">
-                    Floor Price: {asset.floorPrice} qAR
+                    FP: {asset.floorPrice} qAR
                   </AssetPill>
                 </div>
                 <div className="mt-8 flex flex-col gap-4">

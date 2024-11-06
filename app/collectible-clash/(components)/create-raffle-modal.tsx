@@ -12,7 +12,7 @@ import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { useFetchAssets } from "@/hooks/useFetchAssets";
 import { cn, shortenAddress } from "@/lib/utils";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 interface ICreateRaffleModal {
   children: React.ReactNode;
@@ -89,78 +89,76 @@ export const CreateRaffleModal = ({ children }: ICreateRaffleModal) => {
     setSelectedAssetId(id);
   };
 
-  useEffect(() => {
-    console.log("fetchedAssets", fetchedAssets);
-  }, [fetchedAssets]);
-
   return (
     <Modal>
       <ModalTrigger>{children}</ModalTrigger>
       <ModalBody>
         <ModalContent>
-          <div className="flex flex-col gap-8">
-            <h1 className="text-left font-bold text-xl md:text-2xl text-gray-50 relative z-10">
-              Create a raffle
-            </h1>
-            <div className="text-left font-normal text-xl text-gray-50 relative z-10">
-              Select an asset
-            </div>
-          </div>
+          <h1 className="text-left font-bold text-xl md:text-2xl text-gray-50 relative z-10">
+            Create a raffle
+          </h1>
           {!!fetchedAssets && fetchedAssets.length > 0 ? (
-            <div className="mt-4 flex flex-col gap-4 ">
-              <div className="grid grid-cols-4 gap-4 h-[400px] p-4 overflow-y-auto w-full border border-gray-800 rounded-md">
-                {fetchedAssets.map((assetId) => {
-                  const asset = {
-                    id: assetId.toString(),
-                    src: `https://arweave.net/${assetId}`,
-                    name: `${assetId}`,
-                    // collection: "${assetId}",
-                  };
+            <>
+              <div className="mt-8 text-left font-normal text-xl text-gray-50 relative z-10">
+                Select an asset
+              </div>
+              <div className="mt-4 flex flex-col gap-4 ">
+                <div className="grid grid-cols-4 gap-4 h-[400px] p-4 overflow-y-auto w-full border border-gray-800 rounded-md">
+                  {fetchedAssets.map((assetId) => {
+                    const asset = {
+                      id: assetId.toString(),
+                      src: `https://arweave.net/${assetId}`,
+                      name: `${assetId}`,
+                      // collection: "${assetId}",
+                    };
 
-                  return (
-                    <AssetCard
-                      key={`asset-${assetId}`}
-                      {...asset}
-                      onClick={handleAssetClick}
-                      selected={selectedAssetId === asset.id}
+                    return (
+                      <AssetCard
+                        key={`asset-${assetId}`}
+                        {...asset}
+                        onClick={handleAssetClick}
+                        selected={selectedAssetId === asset.id}
+                      />
+                    );
+                  })}
+                </div>
+                <div className="flex gap-8">
+                  <div className="flex flex-col gap-2 min-w-80">
+                    <p className="text-base font-light">
+                      {tickets.toLocaleString()}{" "}
+                      {tickets > 1 ? "tickets" : "ticket"}
+                    </p>
+                    <Slider
+                      defaultValue={[1]}
+                      min={1}
+                      max={10000}
+                      step={1}
+                      onValueChange={handleTicketsChange}
                     />
-                  );
-                })}
-              </div>
-              <div className="flex gap-8">
-                <div className="flex flex-col gap-2 min-w-80">
-                  <p className="text-base font-light">
-                    {tickets.toLocaleString()}{" "}
-                    {tickets > 1 ? "tickets" : "ticket"}
-                  </p>
-                  <Slider
-                    defaultValue={[1]}
-                    min={1}
-                    max={10000}
-                    step={1}
-                    onValueChange={handleTicketsChange}
-                  />
+                  </div>
+                  <div className="grid w-full max-w-sm items-center gap-2">
+                    <Label htmlFor="price">Ticket price (in qAR)</Label>
+                    <Input
+                      id="price"
+                      type="number"
+                      placeholder="0.1 qAR"
+                      min={0.1}
+                    />
+                  </div>
                 </div>
-                <div className="grid w-full max-w-sm items-center gap-2">
-                  <Label htmlFor="price">Ticket price (in qAR)</Label>
-                  <Input
-                    id="price"
-                    type="number"
-                    placeholder="0.1 qAR"
-                    min={0.1}
-                  />
-                </div>
+                <DateTimePicker onDateTimeChange={handleDateTimeChange} />
+                <button
+                  onClick={handleCreateRaffle}
+                  className="shadow-[0_4px_14px_0_rgb(0,118,255,39%)] hover:shadow-[0_6px_20px_rgba(0,118,255,23%)] hover:bg-[rgba(0,118,255,0.9)] px-8 py-2 bg-[#0070f3] rounded-md text-white font-light transition duration-200 ease-linear"
+                >
+                  Create raffle
+                </button>
               </div>
-              <DateTimePicker onDateTimeChange={handleDateTimeChange} />
-              <button
-                onClick={handleCreateRaffle}
-                className="shadow-[0_4px_14px_0_rgb(0,118,255,39%)] hover:shadow-[0_6px_20px_rgba(0,118,255,23%)] hover:bg-[rgba(0,118,255,0.9)] px-8 py-2 bg-[#0070f3] rounded-md text-white font-light transition duration-200 ease-linear"
-              >
-                Create raffle
-              </button>
-            </div>
+            </>
           ) : (
-            <div>No assets found</div>
+            <div className="my-8 flex text-xl h-40 justify-center items-center text-center text-gray-50">
+              No assets found
+            </div>
           )}
         </ModalContent>
       </ModalBody>
