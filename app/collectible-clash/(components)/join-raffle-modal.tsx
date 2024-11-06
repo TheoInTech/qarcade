@@ -13,7 +13,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 export interface IAsset {
-  id: number;
+  id: string;
   src: string;
   name: string;
   collection: string;

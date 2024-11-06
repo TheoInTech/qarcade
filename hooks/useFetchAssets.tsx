@@ -28,6 +28,7 @@ export const useFetchAssets = () => {
   return useQuery({
     queryKey: queryKeys.fetchAssets(),
     queryFn: async () => fetchAssets(),
-    refetchInterval: 5000,
+    staleTime: 30_000,
+    refetchInterval: 30_000,
   });
 };

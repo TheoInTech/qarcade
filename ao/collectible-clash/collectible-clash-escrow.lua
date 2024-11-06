@@ -5,6 +5,9 @@ QARCadeCollectibleClash = "X_il8UGE49JBP3rFBb5L8B_EtuayUiAN8ZvIVSF4jz8"
 -- States
 Depositors = Depositors or {} -- { AssetId = { Address = "", Quantity = 0 } }
 
+--[[
+    Asset Deposit upon transferring the asset to escrow before creating a raffle
+]]
 Handlers.add(
     "Credit-Notice",
     { Action = "Credit-Notice" },
@@ -17,31 +20,19 @@ Handlers.add(
     end
 )
 
+--[[
+    Asset Transfer from the escrow to either the winner or owner
+]]
 Handlers.add(
-    "Transfer",
-    { Action = "Transfer" },
+    "Transfer-Asset",
+    { Action = "Transfer-Asset" },
     function(msg)
-        --[[
-            TODO:
-            - Check if the transfer is valid
-            - Send the asset (there will be a "Debit-Notice" from the asset)
-            - On Debit-Notice, update the depositors table with the new owner (recipient)
-            - On Debit-Notice, send a message to the collectible-clash process to end the raffle
-        ]]
-        
         -- Only QARCadeCollectibleClash process can send a Transfer
         if string.lower(msg.From) ~= string.lower(QARCadeCollectibleClash) then
             ao.send({ Target = msg.From, Action = 'Validation-Error', Tags = { Status = 'Error', Message = 'Transfers are not allowed from ' .. msg.From } })
             return
         end
 
-        --[[
-            Variant: "Raffle" | "Cancel"
-            Asset: AssetId
-            Sender: Address
-            Recipient: Address
-            Quantity: Number
-        ]]
         local data = json.decode(msg.Data)
         ao.send({
             Target = data.Asset,
@@ -51,6 +42,9 @@ Handlers.add(
     end
 )
 
+--[[
+    Asset Debit from the depositors table
+]]
 Handlers.add(
     "Debit-Notice",
     { Action = "Debit-Notice" },

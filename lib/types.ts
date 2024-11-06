@@ -90,3 +90,13 @@ export interface GenericResponse<T = undefined> {
   message: string;
   data: T;
 }
+
+export interface IRaffle {
+  Asset: string;
+  Tickets: number;
+  Price: number;
+  EndDate: number;
+  Creator: string;
+  CreatedAt: number;
+  TicketsSold: number;
+}

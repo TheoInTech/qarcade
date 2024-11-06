@@ -7,6 +7,9 @@ export const AO = {
   collectibleClash:
     process.env.COLLECTIBLE_CLASH ||
     "X_il8UGE49JBP3rFBb5L8B_EtuayUiAN8ZvIVSF4jz8",
+  collectibleClashEscrow:
+    process.env.COLLECTIBLE_CLASH_ESCROW ||
+    "lVpkXuszv7n6fdam30wBnKkNEowdUn8nVqdnjrfXA80",
 };
 
 export const DEFAULTS = {

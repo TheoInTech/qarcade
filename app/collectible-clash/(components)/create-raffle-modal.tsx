@@ -10,6 +10,7 @@ import { DateTimePicker } from "@/components/ui/date-time-picker";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
+import { useCreateRaffle } from "@/hooks/useCreateRaffle";
 import { useFetchAssets } from "@/hooks/useFetchAssets";
 import { cn, shortenAddress } from "@/lib/utils";
 import { useState } from "react";
@@ -68,17 +69,27 @@ const AssetCard = ({
 
 export const CreateRaffleModal = ({ children }: ICreateRaffleModal) => {
   const { data: fetchedAssets } = useFetchAssets();
+  const { mutate: createRaffle, isPending } = useCreateRaffle();
 
   const [tickets, setTickets] = useState(1);
-  const [, setEndDate] = useState<number | null>(null);
+  const [endDate, setEndDate] = useState<number | null>(null);
   const [selectedAssetId, setSelectedAssetId] = useState<string | null>(null);
-
+  const [price, setPrice] = useState<number>(0.1);
   const handleTicketsChange = (value: number[]) => {
     setTickets(value[0]);
   };
+  const submitDisabled =
+    !selectedAssetId || tickets < 1 || !endDate || !price || isPending;
 
   const handleCreateRaffle = () => {
-    alert(`Create raffle with ${tickets} tickets`);
+    if (submitDisabled) return;
+
+    createRaffle({
+      assetId: selectedAssetId,
+      tickets,
+      price,
+      endDate: Math.floor(Date.now() / 1000),
+    });
   };
 
   const handleDateTimeChange = (timestamp: number | null) => {
@@ -87,6 +98,10 @@ export const CreateRaffleModal = ({ children }: ICreateRaffleModal) => {
 
   const handleAssetClick = (id: string) => {
     setSelectedAssetId(id);
+  };
+
+  const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPrice(e.target.value ? parseFloat(e.target.value) : 0);
   };
 
   return (
@@ -143,6 +158,8 @@ export const CreateRaffleModal = ({ children }: ICreateRaffleModal) => {
                       type="number"
                       placeholder="0.1 qAR"
                       min={0.1}
+                      value={price}
+                      onChange={handlePriceChange}
                     />
                   </div>
                 </div>
@@ -150,6 +167,7 @@ export const CreateRaffleModal = ({ children }: ICreateRaffleModal) => {
                 <button
                   onClick={handleCreateRaffle}
                   className="shadow-[0_4px_14px_0_rgb(0,118,255,39%)] hover:shadow-[0_6px_20px_rgba(0,118,255,23%)] hover:bg-[rgba(0,118,255,0.9)] px-8 py-2 bg-[#0070f3] rounded-md text-white font-light transition duration-200 ease-linear"
+                  disabled={submitDisabled}
                 >
                   Create raffle
                 </button>

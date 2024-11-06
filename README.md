@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# qARCade
 
-## Getting Started
+Fun has never been this Rew**AR**ding! Bringing the _culture_ in AO with exciting rewards!
 
-First, run the development server:
+## Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+qARcade is a social gaming platform built on the Arweave and AO ecosystem, utilizing qAR tokens to create a fun, engaging, and rewarding experience. Our mission is to bring community engagement, culture, and excitement to the Arweave and AO ecosystem through interactive games and exclusive digital collectibles.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Landing Page: [Arweave Website WIP](https://3fwx3iqqui34sgsvoej55endb7ejwrhalond4ejq4dicwyoorg6a.arweave.net/2W19ohCiN8kaVXET3pGjD8ibROBbmj4RMODQK2HOibw/) | [Vercel Website](https://qarcade.vercel.app/)
+_\*\*Note: Currently, only Collectible Clash is available. Quantum Flip and Fortune Loop are coming soon.. And only the Create Raffle is using the AO process properly._
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Collectible Clash**: Participate in community raffles to win rare and valuable digital collectibles (Atomic Assets). Expand your collection with unique items you won't find anywhere else.
+- **User Friendly**: User-Friendly Experience: Designed for both crypto novices and experienced users, with intuitive interfaces and helpful guides.
+- **qAR Integration**: Seamlessly use qAR tokens within the platform for participating in games and earning rewards.
+- **Community Engagement**: Join a vibrant community, interact with other players, and climb the leaderboards.
 
-## Learn More
+## Proof-of-Work (AO Processes)
 
-To learn more about Next.js, take a look at the following resources:
+These are the ao processes created so far, from a few weeks of learning arweave and ao development.
+Note: I'm already using AOS 2.0 in these codebase.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| What it's about          | AO Link                                                                                  |
+| ------------------------ | ---------------------------------------------------------------------------------------- |
+| Collectible Clash )      | [View Process](https://www.ao.link/#/entity/X_il8UGE49JBP3rFBb5L8B_EtuayUiAN8ZvIVSF4jz8) |
+| Collectible Clash Escrow | [View Process](https://www.ao.link/#/entity/lVpkXuszv7n6fdam30wBnKkNEowdUn8nVqdnjrfXA80) |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Contact
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Theo Roque | [@theointech](https://x.com/theointech): theoroque95@gmail.com

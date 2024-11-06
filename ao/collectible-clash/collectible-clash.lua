@@ -2,6 +2,7 @@ local json = require("json")
 
 BazarProfileRegistry = "SNy4m-DrqxWl01YqGM4sxI8qCni-58re8uuJLvZPypY"
 QARCadeCollectibleClashEscrow = "lVpkXuszv7n6fdam30wBnKkNEowdUn8nVqdnjrfXA80"
+QARToken = "NG-0lVX882MG5nhARrSzyprEK6ejonHpdUmaaMPsHE8"
 
 -- For testing, use this asset: "WtZ7fCA2kgvwdjbKdthB1uXD1hNPNtv7CaAVn4XWJbk"
 
@@ -11,12 +12,12 @@ DumdumsCollection = "JAHF1fo4MECRZZFKGcT0B6XM94Lqe-3FtB4Ht_kTEK0"
 -- States
 AssetList = AssetList or {}
 
--- TODO: Put this in a SQLite database
+-- TODO: Put this in a SQLite database instead
 -- { AssetId = { Owner = "", Name = "" } }
-Raffles = Raffles or {} 
+Raffles = Raffles or {}
 
--- TODO: Put this in a SQLite database
--- { RaffleId = { Address = "", Tickets = 0 } } for now
+-- TODO: Put this in a SQLite database instead
+-- { AssetId = { Address = "", Tickets = 0 } } for now
 Participants = Participants or {}
 
 --[[
@@ -155,11 +156,10 @@ Handlers.add(
             Price = price,
             EndDate = endDate,
             Creator = msg.From,
-            CreatedAt = os.time(),
+            CreatedAt = msg.Timestamp / 1000,
             TicketsSold = 0,
-            Participants = {}
         }
-        Raffles[asset] = createdRaffle
+        Raffles[raffleData.Asset] = createdRaffle
         
         Handlers.utils.reply('Raffle created successfully. Raffle ID: ' .. raffleData.Asset)(msg)
     end
