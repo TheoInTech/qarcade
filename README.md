@@ -6,7 +6,7 @@ Fun has never been this Rew**AR**ding! Bringing the _culture_ in AO with excitin
 
 qARcade is a social gaming platform built on the Arweave and AO ecosystem, utilizing qAR tokens to create a fun, engaging, and rewarding experience. Our mission is to bring community engagement, culture, and excitement to the Arweave and AO ecosystem through interactive games and exclusive digital collectibles.
 
-Landing Page: [Arweave Website WIP](https://3fwx3iqqui34sgsvoej55endb7ejwrhalond4ejq4dicwyoorg6a.arweave.net/2W19ohCiN8kaVXET3pGjD8ibROBbmj4RMODQK2HOibw/) | [Vercel Website](https://qarcade.vercel.app/)
+Landing Page: [Vercel Website](https://qarcade.vercel.app/) | [xx Arweave Website WIP xx](https://3fwx3iqqui34sgsvoej55endb7ejwrhalond4ejq4dicwyoorg6a.arweave.net/2W19ohCiN8kaVXET3pGjD8ibROBbmj4RMODQK2HOibw/)
 _\*\*Note: Currently, only Collectible Clash is available. Quantum Flip and Fortune Loop are coming soon.. And only the Create Raffle is using the AO process properly._
 
 ## Features
